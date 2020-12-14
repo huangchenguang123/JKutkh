@@ -1,51 +1,52 @@
 package com.sharepower.JKutkh.source.sync;
 
-import com.sharepower.JKutkh.source.parent.ASyncSource;
+import com.sharepower.JKutkh.app.sync.HttpApp;
+import com.sharepower.JKutkh.config.base.Config;
+import com.sharepower.JKutkh.config.source.HttpSourceConfig;
+import com.sharepower.JKutkh.source.base.Source;
+import com.sharepower.JKutkh.utils.SpringContextUtil;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.SneakyThrows;
-import org.apache.http.*;
-import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.bootstrap.HttpServer;
 import org.apache.http.impl.bootstrap.ServerBootstrap;
+import org.apache.http.protocol.HttpRequestHandlerMapper;
+import org.apache.http.protocol.UriHttpRequestHandlerMapper;
 
-import java.util.concurrent.TimeUnit;
+import java.lang.reflect.Field;
 
+/**
+ * @date 2020/12/14
+ * @author chenguang
+ * @desc http source
+ *
+ * all http request will input into this Source
+ */
 @Builder
 @AllArgsConstructor
-public class HttpSyncSource implements ASyncSource {
+public class HttpSyncSource implements Source {
 
-    private String path;
+    private final String path;
 
-    private int port;
+    private final int port;
 
     @SneakyThrows
-    public void start() {
-        SocketConfig socketConfig = SocketConfig.custom()
-                .build();
-
-        HttpServer server = ServerBootstrap.bootstrap()
-                .setListenerPort(port)
-                .setServerInfo("Test/1.1")
-                .setSocketConfig(socketConfig)
-                .setExceptionLogger(ExceptionLogger.STD_ERR)
-                .registerHandler(path, (request, response, context) -> {
-                    StringEntity entity = new StringEntity("hello world", ContentType.create("application/json", "UTF-8"));
-                    response.setEntity(entity);
-                })
-                .create();
-
-        server.start();
-        System.out.println("启动成功！");
-        server.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> server.shutdown(5, TimeUnit.SECONDS)));
+    public void start(Config config) {
+//        HttpApp httpApp = (HttpApp) SpringContextUtil.getBean("httpApp");
+//        HttpServer httpServer = httpApp.getServer();
+//        Class clazz = HttpServer.class;
+//        Field field = clazz.getDeclaredField("handlerMapper");
+//        field.setAccessible(true);
+//        UriHttpRequestHandlerMapper handlerMapper = (UriHttpRequestHandlerMapper) field.get(httpServer);
+//        handlerMapper.register();
+//        field.set();
     }
 
-    public static void main(String[] args) {
-        HttpSyncSource httpSyncSource = new HttpSyncSource("/test", 8080);
-        httpSyncSource.start();
+    @Override
+    public void submit() {
     }
 
 }
