@@ -1,19 +1,13 @@
 package com.sharepower.JKutkh.source.sync;
 
+import com.sharepower.JKutkh.app.base.App;
 import com.sharepower.JKutkh.app.sync.HttpApp;
 import com.sharepower.JKutkh.config.base.Config;
 import com.sharepower.JKutkh.config.source.HttpSourceConfig;
 import com.sharepower.JKutkh.source.base.Source;
-import com.sharepower.JKutkh.utils.SpringContextUtil;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.SneakyThrows;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.bootstrap.HttpServer;
-import org.apache.http.impl.bootstrap.ServerBootstrap;
-import org.apache.http.protocol.HttpRequestHandlerMapper;
 import org.apache.http.protocol.UriHttpRequestHandlerMapper;
 
 import java.lang.reflect.Field;
@@ -25,24 +19,25 @@ import java.lang.reflect.Field;
  *
  * all http request will input into this Source
  */
-@Builder
-@AllArgsConstructor
 public class HttpSyncSource implements Source {
 
-    private final String path;
+    private HttpApp httpApp;
 
-    private final int port;
-
+    @Override
     @SneakyThrows
-    public void start(Config config) {
-//        HttpApp httpApp = (HttpApp) SpringContextUtil.getBean("httpApp");
-//        HttpServer httpServer = httpApp.getServer();
-//        Class clazz = HttpServer.class;
-//        Field field = clazz.getDeclaredField("handlerMapper");
-//        field.setAccessible(true);
-//        UriHttpRequestHandlerMapper handlerMapper = (UriHttpRequestHandlerMapper) field.get(httpServer);
-//        handlerMapper.register();
-//        field.set();
+    public void init(Config config, App app) {
+        // init property
+        httpApp = (HttpApp) app;
+        // int http method
+        HttpSourceConfig httpSourceConfig = (HttpSourceConfig) config;
+        HttpServer httpServer = httpApp.getServer();
+
+        Class<?> clazz = HttpServer.class;
+        Field field = clazz.getDeclaredField("handlerMapper");
+        field.setAccessible(true);
+        UriHttpRequestHandlerMapper handlerMapper = (UriHttpRequestHandlerMapper) field.get(httpServer);
+        handlerMapper.register(httpSourceConfig.getMethod(), httpSourceConfig.getHttpRequestHandler());
+        field.set(httpServer, handlerMapper);
     }
 
     @Override

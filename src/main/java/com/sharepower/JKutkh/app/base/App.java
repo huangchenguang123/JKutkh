@@ -1,5 +1,7 @@
 package com.sharepower.JKutkh.app.base;
 
+import com.sharepower.JKutkh.config.base.Config;
+
 /**
  * @date 2020/12/17
  * @author chenguang
@@ -12,17 +14,17 @@ public abstract class App {
      * @author chenguang 
      * @desc process choreography
      */
-    public void init() {
+    public void init(Config config) {
         // 1.before init, you want to do something
-        before();
-        // 2.init source
-        initSource();
+        before(config);
+        // 2.init target
+        initTarget(config);
         // 3.init pipeline
-        initPipeline();
-        // 4.init target
-        initTarget();
+        initPipeline(config);
+        // 4.init source
+        initSource(config);
         // 5.after init, you want to do something
-        after();
+        after(config);
     }
 
     /**
@@ -30,34 +32,39 @@ public abstract class App {
      * @author chenguang
      * @desc before init, you want to do something
      */
-    public abstract void before();
+    protected void before(Config config) {
+    }
 
     /**
      * @date 2020/12/17
      * @author chenguang
      * @desc init source
      */
-    public abstract void initSource();
+    protected void initSource(Config config) {
+    }
 
     /**
      * @date 2020/12/17
      * @author chenguang
      * @desc init pipeline
      */
-    public abstract void initPipeline();
+    protected void initPipeline(Config config) {
+    }
 
     /**
      * @date 2020/12/17
      * @author chenguang
      * @desc init target
      */
-    public abstract void initTarget();
+    protected void initTarget(Config config) {
+    }
 
     /**
      * @date 2020/12/17
      * @author chenguang
      * @desc after init, you want to do something
      */
-    public abstract void after();
+    protected void after(Config config) {
+    }
 
 }

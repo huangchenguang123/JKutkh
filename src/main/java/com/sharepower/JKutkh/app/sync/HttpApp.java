@@ -2,62 +2,66 @@ package com.sharepower.JKutkh.app.sync;
 
 import com.sharepower.JKutkh.app.base.App;
 import com.sharepower.JKutkh.common.config.GlobalConfig;
+import com.sharepower.JKutkh.config.base.AppConfig;
+import com.sharepower.JKutkh.config.base.Config;
+import com.sharepower.JKutkh.source.base.Source;
+import com.sharepower.JKutkh.source.sync.HttpSyncSource;
 
 import org.apache.http.impl.bootstrap.HttpServer;
 import org.apache.http.impl.bootstrap.ServerBootstrap;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
 
+
 /**
- * @author huangchenguang
+ * @date 2020/12/18
+ * @author chenguang
+ * @desc http server app
  */
 @Getter
-@Component
 public class HttpApp extends App {
 
     @Resource
     private GlobalConfig globalConfig;
 
+    private Source source;
+
     private HttpServer server;
 
     @Override
     @SneakyThrows
-    public void before() {
-        // step 1: http server
+    public void before(Config config) {
+        // http server start
         this.server = ServerBootstrap.bootstrap()
             .setListenerPort(globalConfig.getHttpPort())
             .create();
 
         server.start();
-        System.out.println("HttpSyncSource启动成功！");
-
-        // step 2: init pipeline
-
-        // step 3: init target
     }
 
     @Override
-    public void initSource() {
-
+    protected void initSource(Config config) {
+        // cast type
+        AppConfig appConfig = (AppConfig) config;
+        // init source
+        Source source = new HttpSyncSource();
+        source.init(appConfig, this);
+        this.source = source;
     }
 
     @Override
-    public void initPipeline() {
-
+    protected void initPipeline(Config config) {
     }
 
     @Override
-    public void initTarget() {
-
+    protected void initTarget(Config config) {
     }
 
     @Override
-    public void after() {
-
+    protected void after(Config config) {
     }
 
 }
