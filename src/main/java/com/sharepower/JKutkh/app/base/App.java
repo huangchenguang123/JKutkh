@@ -15,15 +15,15 @@ public abstract class App {
      * @desc process choreography
      */
     public void init(Config config) {
-        // 1.before init, you want to do something
+        // before init, you want to do something
         before(config);
-        // 2.init target
+        // init target
         initTarget(config);
-        // 3.init pipeline
+        // init pipeline
         initPipeline(config);
-        // 4.init source
+        // init source
         initSource(config);
-        // 5.after init, you want to do something
+        // after init, you want to do something
         after(config);
     }
 

@@ -6,17 +6,22 @@ import com.sharepower.JKutkh.config.base.Config;
 /**
  * @date 2020/12/14
  * @author chenguang
- * @desc the base of all Source
+ * @desc the base of all source
  */
 public interface Source {
 
     /**
      * @date 2020/12/14
      * @author chenguang
-     * @desc Source will submit input data to Pipeline
+     * @desc source will submit input data to pipeline
      */
     void submit();
 
+    /**
+     * @date 2020/12/22
+     * @author chenguang
+     * @desc init source
+     */
     void init(Config config, App app);
 
 }
