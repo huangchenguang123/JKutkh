@@ -4,7 +4,7 @@ import com.sharepower.JKutkh.structure.app.base.App;
 import com.sharepower.JKutkh.structure.app.sync.HttpApp;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.source.HttpSourceConfig;
-import com.sharepower.JKutkh.dispatch.HttpDispatch;
+import com.sharepower.JKutkh.dispatch.sync.HttpSyncDispatch;
 import com.sharepower.JKutkh.structure.source.base.Source;
 import com.sharepower.JKutkh.utils.SpringContextUtils;
 
@@ -56,7 +56,7 @@ public class HttpSyncSource implements Source {
     public void init(Config config, App app) {
         httpApp = (HttpApp) app;
         // register http source
-        HttpDispatch httpDispatch = SpringContextUtils.getBean(HttpDispatch.class);
+        HttpSyncDispatch httpDispatch = SpringContextUtils.getBean(HttpSyncDispatch.class);
         HttpSourceConfig sourceConfig = (HttpSourceConfig) config;
         httpDispatch.register(sourceConfig.getDomain(), sourceConfig.getMethod(), this);
     }
