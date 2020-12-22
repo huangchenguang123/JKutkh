@@ -1,7 +1,7 @@
-package com.sharepower.JKutkh.source.base;
+package com.sharepower.JKutkh.structure.source.base;
 
-import com.sharepower.JKutkh.app.base.App;
-import com.sharepower.JKutkh.config.base.Config;
+import com.sharepower.JKutkh.structure.app.base.App;
+import com.sharepower.JKutkh.structure.config.base.Config;
 
 import java.util.Map;
 

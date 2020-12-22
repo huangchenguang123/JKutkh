@@ -1,4 +1,4 @@
-package com.sharepower.JKutkh.config.source;
+package com.sharepower.JKutkh.structure.config.source;
 
 import lombok.Builder;
 import lombok.Getter;

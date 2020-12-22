@@ -1,7 +1,7 @@
-package com.sharepower.JKutkh.config.base;
+package com.sharepower.JKutkh.structure.config.base;
 
 import com.sharepower.JKutkh.common.config.GlobalConfig;
-import com.sharepower.JKutkh.config.source.SourceConfig;
+import com.sharepower.JKutkh.structure.config.source.SourceConfig;
 import com.sharepower.JKutkh.utils.SpringContextUtils;
 
 import lombok.AllArgsConstructor;

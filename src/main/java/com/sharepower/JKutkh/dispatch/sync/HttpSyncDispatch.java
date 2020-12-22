@@ -1,7 +1,7 @@
-package com.sharepower.JKutkh.dispatch;
+package com.sharepower.JKutkh.dispatch.sync;
 
 import com.google.common.collect.Maps;
-import com.sharepower.JKutkh.source.base.Source;
+import com.sharepower.JKutkh.structure.source.base.Source;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ import java.util.Map;
  * @desc http dispatch
  */
 @RestController
-public class HttpDispatch {
+public class HttpSyncDispatch {
 
     /**
      * @date 2020/12/22

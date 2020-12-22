@@ -1,10 +1,11 @@
-package com.sharepower.JKutkh.app.sync;
+package com.sharepower.JKutkh.structure.app.sync;
 
-import com.sharepower.JKutkh.app.base.App;
-import com.sharepower.JKutkh.config.base.AppConfig;
-import com.sharepower.JKutkh.config.base.Config;
-import com.sharepower.JKutkh.source.base.Source;
-import com.sharepower.JKutkh.source.sync.HttpSyncSource;
+import com.sharepower.JKutkh.structure.config.base.AppConfig;
+import com.sharepower.JKutkh.structure.config.base.Config;
+import com.sharepower.JKutkh.structure.source.base.Source;
+import com.sharepower.JKutkh.structure.source.sync.HttpSyncSource;
+import com.sharepower.JKutkh.structure.app.base.App;
+
 
 import lombok.Getter;
 import lombok.SneakyThrows;

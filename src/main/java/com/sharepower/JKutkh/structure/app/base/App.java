@@ -1,6 +1,6 @@
-package com.sharepower.JKutkh.app.base;
+package com.sharepower.JKutkh.structure.app.base;
 
-import com.sharepower.JKutkh.config.base.Config;
+import com.sharepower.JKutkh.structure.config.base.Config;
 
 /**
  * @date 2020/12/17
