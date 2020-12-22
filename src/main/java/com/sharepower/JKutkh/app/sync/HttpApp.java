@@ -6,9 +6,6 @@ import com.sharepower.JKutkh.config.base.Config;
 import com.sharepower.JKutkh.source.base.Source;
 import com.sharepower.JKutkh.source.sync.HttpSyncSource;
 
-import org.apache.http.impl.bootstrap.HttpServer;
-import org.apache.http.impl.bootstrap.ServerBootstrap;
-
 import lombok.Getter;
 import lombok.SneakyThrows;
 
@@ -31,26 +28,11 @@ public class HttpApp extends App {
     /**
      * @date 2020/12/22
      * @author chenguang
-     * @desc http server
-     */
-    private HttpServer server;
-
-    /**
-     * @date 2020/12/22
-     * @author chenguang
-     * @desc init http server
+     * @desc before init, you want to do something
      */
     @Override
     @SneakyThrows
     public void before(Config config) {
-        // cast type
-        AppConfig appConfig = (AppConfig) config;
-        // http server start
-        this.server = ServerBootstrap.bootstrap()
-            .setListenerPort(appConfig.getGlobalConfig().getHttpPort())
-            .create();
-
-        server.start();
     }
 
     /**

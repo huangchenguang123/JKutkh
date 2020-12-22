@@ -1,7 +1,5 @@
 package com.sharepower.JKutkh.config.source;
 
-import org.apache.http.protocol.HttpRequestHandler;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,15 +17,15 @@ public class HttpSourceConfig extends SourceConfig {
     /**
      * @date 2020/12/22
      * @author chenguang
-     * @desc http method name
+     * @desc http domain name
      */
-    private String method;
+    private String domain;
 
     /**
      * @date 2020/12/22
      * @author chenguang
-     * @desc http method handler
+     * @desc http method name
      */
-    private HttpRequestHandler httpRequestHandler;
+    private String method;
 
 }

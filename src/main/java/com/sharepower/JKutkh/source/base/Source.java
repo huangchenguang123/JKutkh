@@ -3,6 +3,8 @@ package com.sharepower.JKutkh.source.base;
 import com.sharepower.JKutkh.app.base.App;
 import com.sharepower.JKutkh.config.base.Config;
 
+import java.util.Map;
+
 /**
  * @date 2020/12/14
  * @author chenguang
@@ -16,6 +18,13 @@ public interface Source {
      * @desc source will submit input data to pipeline
      */
     void submit();
+
+    /**
+     * @date 2020/12/14
+     * @author chenguang
+     * @desc dispatch will input data to source
+     */
+    void input(Map<?, ?> data);
 
     /**
      * @date 2020/12/22
