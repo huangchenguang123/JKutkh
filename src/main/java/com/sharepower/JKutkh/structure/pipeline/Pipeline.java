@@ -32,7 +32,7 @@ public class Pipeline {
      * @author chenguang
      * @desc input data and execute
      */
-    void execute(Map<String, Object> data) {
+    public void execute(Map<String, Object> data) {
         handlers.forEach(handler -> handler.run(data));
     }
 
@@ -41,8 +41,9 @@ public class Pipeline {
      * @author chenguang
      * @desc init pipeline
      */
-    public void init(Config config, App app) {
-        handlers = Lists.newArrayList();
+    public static Pipeline init(Config config, App app) {
+        Pipeline pipeline = new Pipeline();
+        pipeline.handlers = Lists.newArrayList();
         HandlerManager handlerManager = SpringContextUtils.getBean(HandlerManager.class);
         PipelineConfig pipelineConfig = (PipelineConfig) config;
         // load handler config
@@ -50,7 +51,8 @@ public class Pipeline {
         List<Handler> subHandlers = handlerConfigs.stream()
             .map(handlerConfig -> handlerManager.getHandler(handlerConfig.getUrl(), handlerConfig.getClassName()))
             .collect(Collectors.toList());
-        handlers.addAll(subHandlers);
+        pipeline.handlers.addAll(subHandlers);
+        return pipeline;
     }
 
 }

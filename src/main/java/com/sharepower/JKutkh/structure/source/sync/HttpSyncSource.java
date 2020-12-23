@@ -19,7 +19,7 @@ import lombok.SneakyThrows;
  *
  * all http request will input into this source
  */
-public class HttpSyncSource implements Source {
+public class HttpSyncSource extends Source {
 
     /**
      * @date 2020/12/22

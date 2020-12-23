@@ -6,6 +6,7 @@ import com.sharepower.JKutkh.structure.pipeline.Pipeline;
 import com.sharepower.JKutkh.structure.source.base.Source;
 import com.sharepower.JKutkh.structure.source.sync.HttpSyncSource;
 import com.sharepower.JKutkh.structure.app.base.App;
+import com.sharepower.JKutkh.structure.target.Target;
 
 import java.util.Map;
 
@@ -23,25 +24,11 @@ public class HttpApp extends App {
     /**
      * @date 2020/12/22
      * @author chenguang
-     * @desc source
-     */
-    private Source source;
-
-    /**
-     * @date 2020/12/23
-     * @author chenguang
-     * @desc pipeline
-     */
-    private Pipeline pipeline;
-
-    /**
-     * @date 2020/12/22
-     * @author chenguang
      * @desc before init, you want to do something
      */
     @Override
     @SneakyThrows
-    public void before(Config config) {
+    public void beforeInit(Config config) {
     }
 
     /**
@@ -54,9 +41,7 @@ public class HttpApp extends App {
         // cast type
         AppConfig appConfig = (AppConfig) config;
         // init source
-        Source source = new HttpSyncSource();
-        source.init(appConfig.getSourceConfig(), this);
-        this.source = source;
+        this.source = Source.getSource(appConfig.getSourceConfig(), this);;
     }
 
     /**
@@ -68,10 +53,8 @@ public class HttpApp extends App {
     protected void initPipeline(Config config) {
         // cast type
         AppConfig appConfig = (AppConfig) config;
-        // init source
-        Pipeline pipeline = new Pipeline();
-        pipeline.init(appConfig.getPipelineConfig(), this);
-        this.pipeline = pipeline;
+        // init pipeline
+        this.pipeline = Pipeline.init(appConfig.getPipelineConfig(), this);;
     }
 
     /**
@@ -81,6 +64,10 @@ public class HttpApp extends App {
      */
     @Override
     protected void initTarget(Config config) {
+        // cast type
+        AppConfig appConfig = (AppConfig) config;
+        // init target
+        this.target = Target.getTarget(appConfig.getTargetConfig(), this);
     }
 
     /**
@@ -89,7 +76,7 @@ public class HttpApp extends App {
      * @desc after init, you want to do something
      */
     @Override
-    protected void after(Config config) {
+    protected void afterInit(Config config) {
     }
 
     /**

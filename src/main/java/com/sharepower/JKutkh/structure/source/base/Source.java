@@ -1,7 +1,13 @@
 package com.sharepower.JKutkh.structure.source.base;
 
+import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
 import com.sharepower.JKutkh.structure.app.base.App;
 import com.sharepower.JKutkh.structure.config.base.Config;
+import com.sharepower.JKutkh.structure.config.source.SourceConfig;
+import com.sharepower.JKutkh.structure.config.target.TargetConfig;
+import com.sharepower.JKutkh.structure.source.sync.HttpSyncSource;
+import com.sharepower.JKutkh.structure.target.HttpTarget;
+import com.sharepower.JKutkh.structure.target.Target;
 
 import java.util.Map;
 
@@ -10,20 +16,35 @@ import java.util.Map;
  * @author chenguang
  * @desc the base of all source
  */
-public interface Source {
+public abstract class Source {
 
     /**
      * @date 2020/12/14
      * @author chenguang
      * @desc input data and execute
      */
-    void execute(Map<String, Object> data);
+    public abstract void execute(Map<String, Object> data);
 
     /**
      * @date 2020/12/22
      * @author chenguang
      * @desc init source
      */
-    void init(Config config, App app);
+    public abstract void init(Config config, App app);
+
+    /**
+     * @date 2020/12/23
+     * @author chenguang
+     * @desc get source type by config
+     */
+    public static Source getSource(SourceConfig sourceConfig, App app) {
+        String sourceType = sourceConfig.getSourceType();
+        if (TargetTypeEnums.HTTP.getType().equals(sourceType)) {
+            HttpSyncSource httpSyncSource = new HttpSyncSource();
+            httpSyncSource.init(sourceConfig, app);
+            return httpSyncSource;
+        }
+        return null;
+    }
 
 }
