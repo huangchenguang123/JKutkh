@@ -2,6 +2,8 @@ package com.sharepower.JKutkh.structure.app.base;
 
 import com.sharepower.JKutkh.structure.config.base.Config;
 
+import java.util.Map;
+
 /**
  * @date 2020/12/17
  * @author chenguang
@@ -65,6 +67,15 @@ public abstract class App {
      * @desc after init, you want to do something
      */
     protected void after(Config config) {
+    }
+
+    /**
+     * @date 2020/12/23
+     * @author chenguang
+     * @desc input data and execute
+     */
+    public Map<String, Object> execute(Map<String, Object> data) {
+        return null;
     }
 
 }

@@ -2,14 +2,15 @@ package com.sharepower.JKutkh.structure.app.sync;
 
 import com.sharepower.JKutkh.structure.config.base.AppConfig;
 import com.sharepower.JKutkh.structure.config.base.Config;
+import com.sharepower.JKutkh.structure.pipeline.Pipeline;
 import com.sharepower.JKutkh.structure.source.base.Source;
 import com.sharepower.JKutkh.structure.source.sync.HttpSyncSource;
 import com.sharepower.JKutkh.structure.app.base.App;
 
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-
 
 /**
  * @date 2020/12/18
@@ -25,6 +26,13 @@ public class HttpApp extends App {
      * @desc source
      */
     private Source source;
+
+    /**
+     * @date 2020/12/23
+     * @author chenguang
+     * @desc pipeline
+     */
+    private Pipeline pipeline;
 
     /**
      * @date 2020/12/22
@@ -58,6 +66,12 @@ public class HttpApp extends App {
      */
     @Override
     protected void initPipeline(Config config) {
+        // cast type
+        AppConfig appConfig = (AppConfig) config;
+        // init source
+        Pipeline pipeline = new Pipeline();
+        pipeline.init(appConfig.getPipelineConfig(), this);
+        this.pipeline = pipeline;
     }
 
     /**
@@ -76,6 +90,16 @@ public class HttpApp extends App {
      */
     @Override
     protected void after(Config config) {
+    }
+
+    /**
+     * @date 2020/12/23
+     * @author chenguang
+     * @desc input data and execute
+     */
+    @Override
+    public Map<String, Object> execute(Map<String, Object> data) {
+        return null;
     }
 
 }

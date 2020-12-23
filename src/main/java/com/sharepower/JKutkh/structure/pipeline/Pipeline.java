@@ -3,9 +3,14 @@ package com.sharepower.JKutkh.structure.pipeline;
 import com.google.common.collect.Lists;
 import com.sharepower.JKutkh.structure.app.base.App;
 import com.sharepower.JKutkh.structure.config.base.Config;
+import com.sharepower.JKutkh.structure.config.pipeline.HandlerConfig;
+import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
+import com.sharepower.JKutkh.structure.config.pipeline.HandlerManager;
+import com.sharepower.JKutkh.utils.SpringContextUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @date 2020/12/22
@@ -25,9 +30,9 @@ public class Pipeline {
     /**
      * @date 2020/12/14
      * @author chenguang
-     * @desc data will input pipeline and will be change
+     * @desc input data and execute
      */
-    void input(Map<?, ?> data) {
+    void execute(Map<String, Object> data) {
         handlers.forEach(handler -> handler.run(data));
     }
 
@@ -36,8 +41,16 @@ public class Pipeline {
      * @author chenguang
      * @desc init pipeline
      */
-    void init(Config config, App app) {
+    public void init(Config config, App app) {
         handlers = Lists.newArrayList();
+        HandlerManager handlerManager = SpringContextUtils.getBean(HandlerManager.class);
+        PipelineConfig pipelineConfig = (PipelineConfig) config;
+        // load handler config
+        List<HandlerConfig> handlerConfigs = pipelineConfig.getHandlerConfigs();
+        List<Handler> subHandlers = handlerConfigs.stream()
+            .map(handlerConfig -> handlerManager.getHandler(handlerConfig.getUrl(), handlerConfig.getClassName()))
+            .collect(Collectors.toList());
+        handlers.addAll(subHandlers);
     }
 
 }

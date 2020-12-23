@@ -1,6 +1,7 @@
 package com.sharepower.JKutkh.structure.config.base;
 
 import com.sharepower.JKutkh.common.config.GlobalConfig;
+import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
 import com.sharepower.JKutkh.structure.config.source.SourceConfig;
 import com.sharepower.JKutkh.utils.SpringContextUtils;
 
@@ -36,5 +37,12 @@ public class AppConfig extends Config {
      * @desc source config
      */
     private SourceConfig sourceConfig;
+
+    /**
+     * @date 2020/12/23
+     * @author chenguang
+     * @desc pipeline config
+     */
+    private PipelineConfig pipelineConfig;
 
 }

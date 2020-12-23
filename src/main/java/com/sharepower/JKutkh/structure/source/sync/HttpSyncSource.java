@@ -29,21 +29,12 @@ public class HttpSyncSource implements Source {
     private HttpApp httpApp;
 
     /**
-     * @date 2020/12/22
-     * @author chenguang
-     * @desc source will submit input data to pipeline
-     */
-    @Override
-    public void submit() {
-    }
-
-    /**
      * @date 2020/12/14
      * @author chenguang
-     * @desc dispatch will input data to source
+     * @desc input data and execute
      */
     @Override
-    public void input(Map<?, ?> data) {
+    public void execute(Map<String, Object> data) {
     }
 
     /**
@@ -58,7 +49,7 @@ public class HttpSyncSource implements Source {
         // register http source
         HttpSyncDispatch httpDispatch = SpringContextUtils.getBean(HttpSyncDispatch.class);
         HttpSourceConfig sourceConfig = (HttpSourceConfig) config;
-        httpDispatch.register(sourceConfig.getDomain(), sourceConfig.getMethod(), this);
+        httpDispatch.register(sourceConfig.getDomain(), sourceConfig.getMethod(), httpApp);
     }
 
 }

@@ -15,16 +15,9 @@ public interface Source {
     /**
      * @date 2020/12/14
      * @author chenguang
-     * @desc source will submit input data to pipeline
+     * @desc input data and execute
      */
-    void submit();
-
-    /**
-     * @date 2020/12/14
-     * @author chenguang
-     * @desc dispatch will input data to source
-     */
-    void input(Map<?, ?> data);
+    void execute(Map<String, Object> data);
 
     /**
      * @date 2020/12/22

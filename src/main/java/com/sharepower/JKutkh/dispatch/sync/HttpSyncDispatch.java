@@ -1,7 +1,7 @@
 package com.sharepower.JKutkh.dispatch.sync;
 
 import com.google.common.collect.Maps;
-import com.sharepower.JKutkh.structure.source.base.Source;
+import com.sharepower.JKutkh.structure.app.base.App;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +21,9 @@ public class HttpSyncDispatch {
     /**
      * @date 2020/12/22
      * @author chenguang
-     * @desc this table can choose source by url
+     * @desc this table can choose app by url
      */
-    private final Map<String, Source> httpRulerMatcherTable = Maps.newConcurrentMap();
+    private final Map<String, App> httpRulerMatcherTable = Maps.newConcurrentMap();
 
     /**
      * @date 2020/12/22
@@ -31,10 +31,9 @@ public class HttpSyncDispatch {
      * @desc all http will use this method, this method will choose how to run
      */
     @RequestMapping("/{domain}/{method}")
-    public String input(@PathVariable("domain") String domain, @PathVariable("method") String method, @RequestBody Map<?, ?> data) {
-        Source source = httpRulerMatcherTable.get(getKey(domain, method));
-        source.input(data);
-        return getKey(domain, method).concat(" is invoke success, data=").concat(String.valueOf(data));
+    public Map<String, Object> input(@PathVariable("domain") String domain, @PathVariable("method") String method, @RequestBody Map<String, Object> data) {
+        App app = httpRulerMatcherTable.get(getKey(domain, method));
+        return app.execute(data);
     }
 
     /**
@@ -42,8 +41,8 @@ public class HttpSyncDispatch {
      * @author chenguang
      * @desc register ruler matcher table
      */
-    public void register(String domain, String method, Source source) {
-        httpRulerMatcherTable.put(getKey(domain, method), source);
+    public void register(String domain, String method, App app) {
+        httpRulerMatcherTable.put(getKey(domain, method), app);
     }
 
     /**
@@ -51,7 +50,7 @@ public class HttpSyncDispatch {
      * @author chenguang
      * @desc build key
      */
-    private String getKey(String domain, String method) {
+    private static String getKey(String domain, String method) {
         return domain.concat("/").concat(method);
     }
 

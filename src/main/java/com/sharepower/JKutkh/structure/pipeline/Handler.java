@@ -14,6 +14,6 @@ public interface Handler {
      * @author chenguang
      * @desc business logic
      */
-    void run(Map<?, ?> data);
+    void run(Map<String, Object> data);
 
 }

@@ -1,5 +1,7 @@
 package com.sharepower.JKutkh.classloader;
 
+import org.springframework.stereotype.Component;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -11,6 +13,7 @@ import lombok.SneakyThrows;
  * @author chenguang
  * @desc JkutkhClassLoader is used to load class/jar from web or local
  */
+@Component
 public class JkutkhClassLoader extends ClassLoader {
 
     /**
@@ -19,7 +22,7 @@ public class JkutkhClassLoader extends ClassLoader {
      * @desc load one class
      */
     @SneakyThrows
-    public void loadClass(String url, String className) {
+    public Class<?> loadClass(String url, String className) {
         // read byte array from url
         String path = classNameToPath(url, className);
         URL classUrl = new URL(path);
@@ -34,7 +37,7 @@ public class JkutkhClassLoader extends ClassLoader {
         }
         byte[] classData = byteArrayOutputStream.toByteArray();
         // load class
-        defineClass(className, classData, 0, classData.length);
+        return defineClass(className, classData, 0, classData.length);
     }
 
     /**
@@ -42,7 +45,7 @@ public class JkutkhClassLoader extends ClassLoader {
      * @author chenguang
      * @desc className to classPath
      */
-    private String classNameToPath(String url, String className) {
+    private static String classNameToPath(String url, String className) {
         return url + "/" + className.replace('.', '/') + ".class";
     }
 
