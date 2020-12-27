@@ -14,12 +14,4 @@ import lombok.Getter;
 @Configuration
 public class GlobalConfig {
 
-    /**
-     * @date 2020/12/17
-     * @author chenguang
-     * @desc http port
-     */
-    @Value("${http.port}")
-    private int httpPort;
-
 }

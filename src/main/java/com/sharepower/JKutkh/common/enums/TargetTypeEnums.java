@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum  TargetTypeEnums {
+public enum TargetTypeEnums {
 
     HTTP("http"),
     ;
