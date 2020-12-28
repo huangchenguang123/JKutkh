@@ -1,4 +1,4 @@
-package com.sharepower.JKutkh.structure.config.pipeline;
+package com.sharepower.JKutkh.structure.pipeline;
 
 import com.google.common.collect.Maps;
 import com.sharepower.JKutkh.classloader.JkutkhClassLoader;

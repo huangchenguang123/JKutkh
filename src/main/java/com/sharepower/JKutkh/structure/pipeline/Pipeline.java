@@ -5,7 +5,6 @@ import com.sharepower.JKutkh.structure.app.base.App;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.pipeline.HandlerConfig;
 import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
-import com.sharepower.JKutkh.structure.config.pipeline.HandlerManager;
 import com.sharepower.JKutkh.utils.SpringContextUtils;
 
 import java.util.List;
