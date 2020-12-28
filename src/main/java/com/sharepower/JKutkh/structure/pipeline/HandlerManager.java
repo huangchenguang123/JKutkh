@@ -2,7 +2,6 @@ package com.sharepower.JKutkh.structure.pipeline;
 
 import com.google.common.collect.Maps;
 import com.sharepower.JKutkh.classloader.JkutkhClassLoader;
-import com.sharepower.JKutkh.structure.pipeline.Handler;
 
 import org.springframework.stereotype.Component;
 
