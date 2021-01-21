@@ -12,6 +12,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum TargetTypeEnums {
 
+    /**
+     * @date 2021/1/21
+     * @author chenguang
+     * @desc http target
+     */
     HTTP("http"),
     ;
 
@@ -20,6 +25,6 @@ public enum TargetTypeEnums {
      * @author chenguang
      * @desc type
      */
-    private String type;
+    private final String type;
 
 }

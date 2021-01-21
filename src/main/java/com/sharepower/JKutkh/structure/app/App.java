@@ -101,8 +101,6 @@ public abstract class App {
     public Map<String, Object> execute(Map<String, Object> data) {
         // before execute, you want to do something
         beforeExecute(data);
-        // source execute
-        source.execute(data);
         // pipeline execute
         pipeline.execute(data);
         // target execute

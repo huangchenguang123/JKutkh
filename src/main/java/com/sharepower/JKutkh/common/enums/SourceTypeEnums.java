@@ -12,6 +12,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum SourceTypeEnums {
 
+    /**
+     * @date 2021/1/21
+     * @author chenguang
+     * @desc http source
+     */
     HTTP("http"),
     ;
 
@@ -20,6 +25,6 @@ public enum SourceTypeEnums {
      * @author chenguang
      * @desc type
      */
-    private String type;
+    private final String type;
 
 }

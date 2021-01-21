@@ -1,10 +1,13 @@
 package com.sharepower.JKutkh.structure.pipeline;
 
 import com.google.common.collect.Lists;
+import com.sharepower.JKutkh.common.enums.ExecuteEnums;
 import com.sharepower.JKutkh.common.utils.SpringContextUtils;
 import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.config.pipeline.HandlerConfig;
 import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
+
+import org.apache.commons.lang3.BooleanUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +41,13 @@ public class Pipeline {
      * @desc input data and execute
      */
     public void execute(Map<String, Object> data) {
-        handlers.forEach(handler -> handler.run(data));
+        handlers.forEach(handler -> {
+            boolean result = handler.run(data);
+            // if run error
+            if (BooleanUtils.isNotTrue(result)) {
+                data.put(ExecuteEnums.class.getSimpleName(), ExecuteEnums.FAIL);
+            }
+        });
     }
 
     /**

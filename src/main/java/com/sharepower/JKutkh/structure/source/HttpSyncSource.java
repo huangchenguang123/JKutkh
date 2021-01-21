@@ -3,11 +3,8 @@ package com.sharepower.JKutkh.structure.source;
 import com.sharepower.JKutkh.common.utils.SpringContextUtils;
 import com.sharepower.JKutkh.dispatch.HttpSyncDispatch;
 import com.sharepower.JKutkh.structure.app.App;
-import com.sharepower.JKutkh.structure.app.HttpApp;
 import com.sharepower.JKutkh.structure.config.source.HttpSourceConfig;
 import com.sharepower.JKutkh.structure.config.source.SourceConfig;
-
-import java.util.Map;
 
 import lombok.SneakyThrows;
 
@@ -23,18 +20,9 @@ public class HttpSyncSource extends Source {
     /**
      * @date 2020/12/22
      * @author chenguang
-     * @desc http app
+     * @desc app
      */
-    private HttpApp httpApp;
-
-    /**
-     * @date 2020/12/14
-     * @author chenguang
-     * @desc input data and execute
-     */
-    @Override
-    public void execute(Map<String, Object> data) {
-    }
+    private App app;
 
     /**
      * @date 2020/12/22
@@ -44,11 +32,10 @@ public class HttpSyncSource extends Source {
     @Override
     @SneakyThrows
     public void init(SourceConfig sourceConfig, App app) {
-        httpApp = (HttpApp) app;
         // register http source
         HttpSyncDispatch httpDispatch = SpringContextUtils.getBean(HttpSyncDispatch.class);
         HttpSourceConfig httpSourceConfig = (HttpSourceConfig) sourceConfig;
-        httpDispatch.register(httpSourceConfig.getDomain(), httpSourceConfig.getMethod(), httpApp);
+        httpDispatch.register(httpSourceConfig.getDomain(), httpSourceConfig.getMethod(), app);
     }
 
 }
