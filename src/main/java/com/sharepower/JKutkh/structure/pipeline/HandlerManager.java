@@ -19,7 +19,6 @@ import lombok.SneakyThrows;
  * @desc manage all handler
  */
 @Component
-@SuppressWarnings("unchecked")
 public class HandlerManager {
 
     @Resource
@@ -48,6 +47,7 @@ public class HandlerManager {
      * @desc get handler from map
      */
     @SneakyThrows
+    @SuppressWarnings("unchecked")
     public Handler getHandler(String url, String className) {
         Handler handler = handlerMap.get(className);
         // load class from url

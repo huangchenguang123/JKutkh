@@ -2,7 +2,6 @@ package com.sharepower.JKutkh.structure.target;
 
 import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
 import com.sharepower.JKutkh.structure.app.App;
-import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.target.TargetConfig;
 
 import java.util.Map;
@@ -26,7 +25,7 @@ public abstract class Target {
      * @author chenguang
      * @desc init target
      */
-    public abstract void init(Config config, App app);
+    public abstract void init(TargetConfig targetConfig, App app);
 
     /**
      * @date 2020/12/23

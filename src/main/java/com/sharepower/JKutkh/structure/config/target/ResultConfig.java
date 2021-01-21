@@ -1,4 +1,6 @@
-package com.sharepower.JKutkh.structure.config.base;
+package com.sharepower.JKutkh.structure.config.target;
+
+import com.sharepower.JKutkh.structure.config.base.Config;
 
 import java.util.Set;
 
@@ -12,7 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ResultConfig {
+public class ResultConfig extends Config {
 
     /**
      * @date 2020/12/23

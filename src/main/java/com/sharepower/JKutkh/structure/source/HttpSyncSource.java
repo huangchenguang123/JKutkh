@@ -1,11 +1,11 @@
 package com.sharepower.JKutkh.structure.source;
 
+import com.sharepower.JKutkh.common.utils.SpringContextUtils;
 import com.sharepower.JKutkh.dispatch.HttpSyncDispatch;
 import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.app.HttpApp;
-import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.source.HttpSourceConfig;
-import com.sharepower.JKutkh.utils.SpringContextUtils;
+import com.sharepower.JKutkh.structure.config.source.SourceConfig;
 
 import java.util.Map;
 
@@ -43,12 +43,12 @@ public class HttpSyncSource extends Source {
      */
     @Override
     @SneakyThrows
-    public void init(Config config, App app) {
+    public void init(SourceConfig sourceConfig, App app) {
         httpApp = (HttpApp) app;
         // register http source
         HttpSyncDispatch httpDispatch = SpringContextUtils.getBean(HttpSyncDispatch.class);
-        HttpSourceConfig sourceConfig = (HttpSourceConfig) config;
-        httpDispatch.register(sourceConfig.getDomain(), sourceConfig.getMethod(), httpApp);
+        HttpSourceConfig httpSourceConfig = (HttpSourceConfig) sourceConfig;
+        httpDispatch.register(httpSourceConfig.getDomain(), httpSourceConfig.getMethod(), httpApp);
     }
 
 }

@@ -30,7 +30,7 @@ public class JkutkhClassLoader extends ClassLoader {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         int bufferSize = 4096;
         byte[] buffer = new byte[bufferSize];
-        int bytesNumRead = 0;
+        int bytesNumRead;
         // read bytes
         while ((bytesNumRead = ins.read(buffer)) != -1) {
             byteArrayOutputStream.write(buffer, 0, bytesNumRead);

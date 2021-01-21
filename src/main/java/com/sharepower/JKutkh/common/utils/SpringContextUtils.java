@@ -1,4 +1,4 @@
-package com.sharepower.JKutkh.utils;
+package com.sharepower.JKutkh.common.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

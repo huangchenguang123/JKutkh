@@ -1,6 +1,5 @@
 package com.sharepower.JKutkh.structure.config.source;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder
 public class HttpSourceConfig extends SourceConfig {
 
     /**

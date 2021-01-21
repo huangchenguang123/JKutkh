@@ -1,11 +1,10 @@
 package com.sharepower.JKutkh.structure.pipeline;
 
 import com.google.common.collect.Lists;
+import com.sharepower.JKutkh.common.utils.SpringContextUtils;
 import com.sharepower.JKutkh.structure.app.App;
-import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.pipeline.HandlerConfig;
 import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
-import com.sharepower.JKutkh.utils.SpringContextUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -47,10 +46,9 @@ public class Pipeline {
      * @author chenguang
      * @desc init pipeline
      */
-    public void init(Config config, App app) {
+    public void init(PipelineConfig pipelineConfig, App app) {
         this.handlers = Lists.newArrayList();
         HandlerManager handlerManager = SpringContextUtils.getBean(HandlerManager.class);
-        PipelineConfig pipelineConfig = (PipelineConfig) config;
         // load handler config
         List<HandlerConfig> handlerConfigs = pipelineConfig.getHandlerConfigs();
         List<Handler> subHandlers = handlerConfigs.stream()
@@ -65,9 +63,9 @@ public class Pipeline {
      * @author chenguang
      * @desc get pipeline
      */
-    public static Pipeline getPipeline(Config config, App app) {
+    public static Pipeline getPipeline(PipelineConfig pipelineConfig, App app) {
         Pipeline pipeline = new Pipeline();
-        pipeline.init(config, app);
+        pipeline.init(pipelineConfig, app);
         return pipeline;
     }
 

@@ -4,10 +4,7 @@ import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
 import com.sharepower.JKutkh.structure.config.source.SourceConfig;
 import com.sharepower.JKutkh.structure.config.target.TargetConfig;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -17,9 +14,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class AppConfig extends Config {
 
     /**
@@ -42,12 +36,5 @@ public class AppConfig extends Config {
      * @desc target config
      */
     private TargetConfig targetConfig;
-
-    /**
-     * @date 2020/12/23
-     * @author chenguang
-     * @desc result config
-     */
-    private ResultConfig resultConfig;
 
 }
