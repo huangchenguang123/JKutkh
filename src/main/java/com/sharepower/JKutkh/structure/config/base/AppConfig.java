@@ -1,10 +1,8 @@
 package com.sharepower.JKutkh.structure.config.base;
 
-import com.sharepower.JKutkh.common.config.GlobalConfig;
 import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
 import com.sharepower.JKutkh.structure.config.source.SourceConfig;
 import com.sharepower.JKutkh.structure.config.target.TargetConfig;
-import com.sharepower.JKutkh.utils.SpringContextUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,14 +21,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppConfig extends Config {
-
-    /**
-     * @date 2020/12/22
-     * @author chenguang
-     * @desc global config
-     */
-    @Builder.Default
-    private GlobalConfig globalConfig = SpringContextUtils.getBean(GlobalConfig.class);
 
     /**
      * @date 2020/12/22

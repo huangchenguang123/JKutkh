@@ -1,7 +1,7 @@
 package com.sharepower.JKutkh.structure.target;
 
 import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
-import com.sharepower.JKutkh.structure.app.base.App;
+import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.target.TargetConfig;
 

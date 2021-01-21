@@ -1,7 +1,7 @@
 package com.sharepower.JKutkh.dispatch;
 
 import com.google.common.collect.Maps;
-import com.sharepower.JKutkh.structure.app.base.App;
+import com.sharepower.JKutkh.structure.app.App;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

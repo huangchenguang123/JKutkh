@@ -1,11 +1,10 @@
-package com.sharepower.JKutkh.structure.source.sync;
+package com.sharepower.JKutkh.structure.source;
 
 import com.sharepower.JKutkh.dispatch.HttpSyncDispatch;
-import com.sharepower.JKutkh.structure.app.base.App;
-import com.sharepower.JKutkh.structure.app.sync.HttpApp;
+import com.sharepower.JKutkh.structure.app.App;
+import com.sharepower.JKutkh.structure.app.HttpApp;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.source.HttpSourceConfig;
-import com.sharepower.JKutkh.structure.source.base.Source;
 import com.sharepower.JKutkh.utils.SpringContextUtils;
 
 import java.util.Map;

@@ -1,13 +1,9 @@
-package com.sharepower.JKutkh.structure.source.base;
+package com.sharepower.JKutkh.structure.source;
 
 import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
-import com.sharepower.JKutkh.structure.app.base.App;
+import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.source.SourceConfig;
-import com.sharepower.JKutkh.structure.config.target.TargetConfig;
-import com.sharepower.JKutkh.structure.source.sync.HttpSyncSource;
-import com.sharepower.JKutkh.structure.target.HttpTarget;
-import com.sharepower.JKutkh.structure.target.Target;
 
 import java.util.Map;
 

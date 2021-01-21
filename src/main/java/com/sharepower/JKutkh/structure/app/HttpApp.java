@@ -1,11 +1,10 @@
-package com.sharepower.JKutkh.structure.app.sync;
+package com.sharepower.JKutkh.structure.app;
 
 import com.sharepower.JKutkh.structure.config.base.AppConfig;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.pipeline.Pipeline;
-import com.sharepower.JKutkh.structure.source.base.Source;
-import com.sharepower.JKutkh.structure.source.sync.HttpSyncSource;
-import com.sharepower.JKutkh.structure.app.base.App;
+import com.sharepower.JKutkh.structure.source.Source;
+import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.target.Target;
 
 import java.util.Map;
@@ -54,7 +53,7 @@ public class HttpApp extends App {
         // cast type
         AppConfig appConfig = (AppConfig) config;
         // init pipeline
-        this.pipeline = Pipeline.init(appConfig.getPipelineConfig(), this);;
+        this.pipeline = Pipeline.getPipeline(appConfig.getPipelineConfig(), this);;
     }
 
     /**

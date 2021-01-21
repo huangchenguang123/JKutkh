@@ -1,7 +1,7 @@
 package com.sharepower.JKutkh.structure.pipeline;
 
 import com.google.common.collect.Lists;
-import com.sharepower.JKutkh.structure.app.base.App;
+import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.config.pipeline.HandlerConfig;
 import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
@@ -18,6 +18,13 @@ import java.util.stream.Collectors;
  * and their data has be change
  */
 public class Pipeline {
+
+    /**
+     * @date 2020/12/22
+     * @author chenguang
+     * @desc app
+     */
+    private App app;
 
     /**
      * @date 2020/12/22
@@ -40,9 +47,8 @@ public class Pipeline {
      * @author chenguang
      * @desc init pipeline
      */
-    public static Pipeline init(Config config, App app) {
-        Pipeline pipeline = new Pipeline();
-        pipeline.handlers = Lists.newArrayList();
+    public void init(Config config, App app) {
+        this.handlers = Lists.newArrayList();
         HandlerManager handlerManager = SpringContextUtils.getBean(HandlerManager.class);
         PipelineConfig pipelineConfig = (PipelineConfig) config;
         // load handler config
@@ -50,7 +56,18 @@ public class Pipeline {
         List<Handler> subHandlers = handlerConfigs.stream()
             .map(handlerConfig -> handlerManager.getHandler(handlerConfig.getUrl(), handlerConfig.getClassName()))
             .collect(Collectors.toList());
-        pipeline.handlers.addAll(subHandlers);
+        this.handlers.addAll(subHandlers);
+        this.app = app;
+    }
+
+    /**
+     * @date 2021/1/21
+     * @author chenguang
+     * @desc get pipeline
+     */
+    public static Pipeline getPipeline(Config config, App app) {
+        Pipeline pipeline = new Pipeline();
+        pipeline.init(config, app);
         return pipeline;
     }
 
