@@ -3,7 +3,6 @@ package com.sharepower.JKutkh.structure.source;
 import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
 import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.config.source.SourceConfig;
-import com.sharepower.JKutkh.structure.rule.RuleValidate;
 
 /**
  * @date 2020/12/14
@@ -11,13 +10,6 @@ import com.sharepower.JKutkh.structure.rule.RuleValidate;
  * @desc the base of all source
  */
 public abstract class Source {
-
-    /**
-     * @date 2021/1/21
-     * @author chenguang
-     * @desc rule validate
-     */
-    protected RuleValidate ruleValidate;
 
     /**
      * @date 2020/12/22

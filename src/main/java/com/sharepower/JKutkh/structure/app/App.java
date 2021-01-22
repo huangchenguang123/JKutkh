@@ -1,5 +1,6 @@
 package com.sharepower.JKutkh.structure.app;
 
+import com.sharepower.JKutkh.common.enums.ExecuteEnums;
 import com.sharepower.JKutkh.structure.config.base.Config;
 import com.sharepower.JKutkh.structure.pipeline.Pipeline;
 import com.sharepower.JKutkh.structure.source.Source;
@@ -103,8 +104,11 @@ public abstract class App {
         beforeExecute(data);
         // pipeline execute
         pipeline.execute(data);
-        // target execute
-        target.execute(data);
+        // if pipeline run success, continue target execute
+        if (data.get(ExecuteEnums.class.getSimpleName()).equals(ExecuteEnums.SUCCESS)) {
+            // target execute
+            target.execute(data);
+        }
         // before execute, you want to do something
         afterExecute(data);
         return data;

@@ -41,13 +41,18 @@ public class Pipeline {
      * @desc input data and execute
      */
     public void execute(Map<String, Object> data) {
-        handlers.forEach(handler -> {
+        for (Handler handler : handlers) {
+            boolean validate = handler.getRuleValidate().execute(data);
+            if (BooleanUtils.isNotTrue(validate)) {
+                data.put(ExecuteEnums.class.getSimpleName(), ExecuteEnums.RULE_VALIDATE_FAIL);
+                break;
+            }
             boolean result = handler.run(data);
             // if run error
             if (BooleanUtils.isNotTrue(result)) {
                 data.put(ExecuteEnums.class.getSimpleName(), ExecuteEnums.FAIL);
             }
-        });
+        }
     }
 
     /**

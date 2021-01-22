@@ -22,6 +22,13 @@ public enum ExecuteEnums {
     /**
      * @date 2021/1/21
      * @author chenguang
+     * @desc execute success
+     */
+    RULE_VALIDATE_FAIL(300, "rule_validate_fail"),
+
+    /**
+     * @date 2021/1/21
+     * @author chenguang
      * @desc JKutkh run error
      */
     SYSTEM_ERROR(400, "system error"),
