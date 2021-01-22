@@ -3,6 +3,7 @@ package com.sharepower.JKutkh.structure.target;
 import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
 import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.config.target.TargetConfig;
+import com.sharepower.JKutkh.structure.rule.RuleValidate;
 
 import java.util.Map;
 
@@ -12,6 +13,13 @@ import java.util.Map;
  * @desc output data to somewhere
  */
 public abstract class Target {
+
+    /**
+     * @date 2021/1/21
+     * @author chenguang
+     * @desc rule validate
+     */
+    protected RuleValidate ruleValidate;
 
     /**
      * @date 2020/12/23

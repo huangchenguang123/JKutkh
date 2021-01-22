@@ -1,5 +1,7 @@
 package com.sharepower.JKutkh.structure.pipeline;
 
+import com.sharepower.JKutkh.structure.rule.RuleValidate;
+
 import java.util.Map;
 
 /**
@@ -7,13 +9,20 @@ import java.util.Map;
  * @author chenguang
  * @desc one block of pipeline
  */
-public interface Handler {
+public abstract class Handler {
+
+    /**
+     * @date 2021/1/21
+     * @author chenguang
+     * @desc rule validate
+     */
+    protected RuleValidate ruleValidate;
 
     /**
      * @date 2020/12/22
      * @author chenguang
      * @desc business logic
      */
-    boolean run(Map<String, Object> data);
+    protected abstract boolean run(Map<String, Object> data);
 
 }
