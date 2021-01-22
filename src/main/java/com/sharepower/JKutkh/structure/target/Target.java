@@ -1,5 +1,6 @@
 package com.sharepower.JKutkh.structure.target;
 
+import com.sharepower.JKutkh.common.enums.ExecuteEnums;
 import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
 import com.sharepower.JKutkh.structure.app.App;
 import com.sharepower.JKutkh.structure.config.target.TargetConfig;
@@ -18,7 +19,18 @@ public abstract class Target {
      * @author chenguang 
      * @desc input data and execute
      */
-    public abstract void execute(Map<String, Object> data);
+    public void validateAndExecute(Map<String, Object> data) {
+        if (data.get(ExecuteEnums.class.getSimpleName()).equals(ExecuteEnums.SUCCESS)) {
+            execute(data);
+        }
+    }
+
+    /**
+     * @date 2020/12/23
+     * @author chenguang
+     * @desc input data and execute
+     */
+    protected abstract void execute(Map<String, Object> data);
 
     /**
      * @date 2020/12/22

@@ -104,11 +104,8 @@ public abstract class App {
         beforeExecute(data);
         // pipeline execute
         pipeline.execute(data);
-        // if pipeline run success, continue target execute
-        if (data.get(ExecuteEnums.class.getSimpleName()).equals(ExecuteEnums.SUCCESS)) {
-            // target execute
-            target.execute(data);
-        }
+        // target execute
+        target.validateAndExecute(data);
         // before execute, you want to do something
         afterExecute(data);
         return data;

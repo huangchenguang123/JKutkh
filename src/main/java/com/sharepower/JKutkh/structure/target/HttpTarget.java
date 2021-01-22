@@ -37,7 +37,7 @@ public class HttpTarget extends Target {
      * @desc input data and execute
      */
     @Override
-    public void execute(Map<String, Object> data) {
+    protected void execute(Map<String, Object> data) {
         // get execute
         ExecuteEnums execute = (ExecuteEnums) data.get(ExecuteEnums.class.getSimpleName());
         // remove all others fields
