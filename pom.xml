@@ -20,6 +20,8 @@
         <commons.lang3.version>3.11</commons.lang3.version>
         <fastjson.version>1.2.75</fastjson.version>
         <QLExpress.version>3.2.0</QLExpress.version>
+        <mybatis.version>2.1.4</mybatis.version>
+        <druid.version>1.2.4</druid.version>
     </properties>
 
     <dependencies>
@@ -41,6 +43,27 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <!--druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
         </dependency>
         <!--junit-->
         <dependency>

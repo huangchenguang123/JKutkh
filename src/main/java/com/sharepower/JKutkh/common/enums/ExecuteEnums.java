@@ -22,9 +22,9 @@ public enum ExecuteEnums {
     /**
      * @date 2021/1/21
      * @author chenguang
-     * @desc execute success
+     * @desc rule validate fail
      */
-    RULE_VALIDATE_FAIL(300, "rule_validate_fail"),
+    RULE_VALIDATE_FAIL(300, "rule validate fail"),
 
     /**
      * @date 2021/1/21
