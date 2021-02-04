@@ -71,7 +71,7 @@ public class Result<T> {
      * @desc object to map
      */
     public Map<String, Object> toMap() {
-        return JSON.parseObject(JSON.toJSONString(this), new TypeReference<>() {});
+        return JSON.parseObject(JSON.toJSONString(this), new TypeReference<Map<String, Object>>() {});
     }
 
 }

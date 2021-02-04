@@ -1,7 +1,5 @@
 package com.sharepower.JKutkh.structure.pipeline;
 
-import com.sharepower.JKutkh.structure.rule.RuleValidate;
-
 import java.util.Map;
 
 import lombok.Getter;
@@ -13,13 +11,6 @@ import lombok.Getter;
  */
 @Getter
 public abstract class Handler {
-
-    /**
-     * @date 2021/1/21
-     * @author chenguang
-     * @desc rule validate
-     */
-    protected RuleValidate ruleValidate;
 
     /**
      * @date 2020/12/22
