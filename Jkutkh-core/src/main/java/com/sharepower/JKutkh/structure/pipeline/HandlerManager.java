@@ -53,7 +53,9 @@ public class HandlerManager {
         // load class from url
         if (Objects.isNull(handler)) {
             Class<? extends Handler> clazz = (Class<? extends Handler>) jkutkhClassLoader.loadClass(url, className);
-            handler = handlerMap.put(getKey(url, className), clazz.getDeclaredConstructor().newInstance());
+            Handler newHandler = clazz.getDeclaredConstructor().newInstance();
+            handlerMap.put(getKey(url, className), newHandler);
+            handler = newHandler;
         }
         return handler;
     }
