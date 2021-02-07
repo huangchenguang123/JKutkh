@@ -29,6 +29,7 @@
         <QLExpress.version>3.2.0</QLExpress.version>
         <mybatis.version>2.1.4</mybatis.version>
         <druid.version>1.2.4</druid.version>
+        <commons.collections4.version>4.4</commons.collections4.version>
     </properties>
 
     <dependencyManagement>
@@ -79,6 +80,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>QLExpress</artifactId>
                 <version>${QLExpress.version}</version>
+            </dependency>
+            <!--commons-collections4-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons.collections4.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
