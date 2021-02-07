@@ -42,7 +42,6 @@ public class ExecuteThreadPool {
      * @author chenguang
      * @desc submit listenable callable
      */
-    @SuppressWarnings("all")
     public <T, R> void submitListenable(Callable<?> callable, Function<Object, Object> function) {
         ListenableFuture<?> listenableFuture = threadPoolExecutor.submit(callable);
         Runnable runnable = () -> {
