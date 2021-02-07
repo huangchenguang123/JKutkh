@@ -6,46 +6,39 @@ import lombok.Setter;
 /**
  * @date 2021/1/25
  * @author chenguang
- * @desc component entity
+ * @desc class entity
  */
 @Getter
 @Setter
-public class ComponentEntity {
+public class ClassEntity {
 
     /**
-     * @date 2021/1/25
+     * @date 2021/2/7
      * @author chenguang
      * @desc id
      */
     private Long id;
 
     /**
-     * @date 2021/1/25
+     * @date 2021/2/7
      * @author chenguang
-     * @desc source config
+     * @desc class url
      */
-    private String sourceConfig;
+    private String url;
 
     /**
-     * @date 2021/1/25
+     * @date 2021/2/7
      * @author chenguang
-     * @desc pipeline config
+     * @desc class name
      */
-    private String pipelineConfig;
+    private String className;
 
     /**
-     * @date 2021/1/25
+     * @date 2021/2/7
      * @author chenguang
-     * @desc target config
+     * @desc delete mark
      */
-    private String targetConfig;
-
-    /**
-     * @date 2021/1/25
-     * @author chenguang
-     * @desc app id
-     */
-    private Long appId;
+    private String introduction;
 
     /**
      * @date 2021/2/7

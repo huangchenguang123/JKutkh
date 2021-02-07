@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class HandlerWapper {
+public class HandlerWrapper {
 
     /**
      * @date 2021/1/21

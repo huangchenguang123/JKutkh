@@ -34,7 +34,7 @@ public class Pipeline {
      * @author chenguang
      * @desc handler list
      */
-    private List<HandlerWapper> handlers;
+    private List<HandlerWrapper> handlers;
 
     /**
      * @date 2020/12/14
@@ -42,13 +42,13 @@ public class Pipeline {
      * @desc input data and execute
      */
     public void execute(Map<String, Object> data) {
-        for (HandlerWapper handlerWapper : handlers) {
-            boolean validate = handlerWapper.getRuleValidate().execute(data);
+        for (HandlerWrapper handlerWrapper : handlers) {
+            boolean validate = handlerWrapper.getRuleValidate().execute(data);
             if (BooleanUtils.isNotTrue(validate)) {
                 data.put(ExecuteEnums.class.getSimpleName(), ExecuteEnums.RULE_VALIDATE_FAIL);
                 break;
             }
-            boolean result = handlerWapper.getHandler().run(data);
+            boolean result = handlerWrapper.getHandler().run(data);
             // if run error
             if (BooleanUtils.isNotTrue(result)) {
                 data.put(ExecuteEnums.class.getSimpleName(), ExecuteEnums.FAIL);
@@ -66,17 +66,17 @@ public class Pipeline {
         HandlerManager handlerManager = SpringContextUtils.getBean(HandlerManager.class);
         // load handler config
         List<HandlerConfig> handlerConfigs = pipelineConfig.getHandlerConfigs();
-        List<HandlerWapper> subHandlers = handlerConfigs.stream()
+        List<HandlerWrapper> subHandlers = handlerConfigs.stream()
             .map(handlerConfig -> {
-                HandlerWapper wapper = new HandlerWapper();
+                HandlerWrapper wrapper = new HandlerWrapper();
                 // init handler
                 Handler handler = handlerManager.getHandler(handlerConfig.getUrl(), handlerConfig.getClassName());
-                wapper.setHandler(handler);
+                wrapper.setHandler(handler);
                 // init ruleValidate
                 RuleValidate ruleValidate = new RuleValidate();
                 ruleValidate.init(handlerConfig.getRuleValidateConfig());
-                wapper.setRuleValidate(ruleValidate);
-                return wapper;
+                wrapper.setRuleValidate(ruleValidate);
+                return wrapper;
             })
             .collect(Collectors.toList());
         this.handlers.addAll(subHandlers);

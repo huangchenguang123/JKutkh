@@ -5,8 +5,10 @@ import com.sharepower.JKutkh.common.enums.SourceTypeEnums;
 import com.sharepower.JKutkh.common.enums.TargetTypeEnums;
 import com.sharepower.JKutkh.dal.dao.JKutkhDAO;
 import com.sharepower.JKutkh.dal.entity.AppEntity;
+import com.sharepower.JKutkh.dal.entity.ClassEntity;
 import com.sharepower.JKutkh.dal.entity.ComponentEntity;
 import com.sharepower.JKutkh.structure.config.base.AppConfig;
+import com.sharepower.JKutkh.structure.config.pipeline.HandlerConfig;
 import com.sharepower.JKutkh.structure.config.pipeline.PipelineConfig;
 import com.sharepower.JKutkh.structure.config.source.HttpSourceConfig;
 import com.sharepower.JKutkh.structure.config.source.SourceConfig;
@@ -39,26 +41,30 @@ public class AppManager {
      */
     @PostConstruct
     private void init() {
-        List<AppEntity> appList = jKutkhDAO.getAppList(NumberUtils.LONG_ZERO);
-        appList.forEach(appEntity -> {
-            ComponentEntity componentEntity = jKutkhDAO.getComponent(appEntity.getId());
-            // init appConfig
-            AppConfig appConfig = new AppConfig();
-            // init sourceConfig
-            String sourceConfigStr = componentEntity.getSourceConfig();
-            SourceConfig sourceConfig = JSON.parseObject(sourceConfigStr, SourceConfig.class);
-            appConfig.setSourceConfig(chooseSourceConfig(sourceConfig, sourceConfigStr));
-            // init pipeLineConfig
-            String pipeLineConfigStr = componentEntity.getPipelineConfig();
-            PipelineConfig pipelineConfig = JSON.parseObject(pipeLineConfigStr, PipelineConfig.class);
-            appConfig.setPipelineConfig(pipelineConfig);
-            // init targetConfig
-            String targetConfigStr = componentEntity.getTargetConfig();
-            TargetConfig targetConfig = JSON.parseObject(targetConfigStr, TargetConfig.class);
-            appConfig.setTargetConfig(chooseTargetConfig(targetConfig, targetConfigStr));
-            // init app
-            initApp(appConfig);
-        });
+        long pageSize = 10L;
+        List<AppEntity> appList;
+        do {
+            appList = jKutkhDAO.getAppList(NumberUtils.LONG_ZERO, pageSize);
+            appList.forEach(appEntity -> {
+                ComponentEntity componentEntity = jKutkhDAO.getComponent(appEntity.getId());
+                // init appConfig
+                AppConfig appConfig = new AppConfig();
+                // init sourceConfig
+                String sourceConfigStr = componentEntity.getSourceConfig();
+                SourceConfig sourceConfig = JSON.parseObject(sourceConfigStr, SourceConfig.class);
+                appConfig.setSourceConfig(chooseSourceConfig(sourceConfig, sourceConfigStr));
+                // init pipeLineConfig
+                String pipeLineConfigStr = componentEntity.getPipelineConfig();
+                PipelineConfig pipelineConfig = JSON.parseObject(pipeLineConfigStr, PipelineConfig.class);
+                appConfig.setPipelineConfig(parsePipeline(pipelineConfig));
+                // init targetConfig
+                String targetConfigStr = componentEntity.getTargetConfig();
+                TargetConfig targetConfig = JSON.parseObject(targetConfigStr, TargetConfig.class);
+                appConfig.setTargetConfig(chooseTargetConfig(targetConfig, targetConfigStr));
+                // init app
+                initApp(appConfig);
+            });
+        } while (appList.size() == pageSize);
     }
     
     /**
@@ -96,6 +102,20 @@ public class AppManager {
             App app = new HttpApp();
             app.init(appConfig);
         }
+    }
+
+    /**
+     * @date 2021/2/7
+     * @author chenguang
+     * @desc parse class to handler config
+     */
+    private PipelineConfig parsePipeline(PipelineConfig pipelineConfig) {
+        for (HandlerConfig handlerConfig : pipelineConfig.getHandlerConfigs()) {
+            ClassEntity classEntity = jKutkhDAO.getClass(handlerConfig.getClassId());
+            handlerConfig.setUrl(classEntity.getUrl());
+            handlerConfig.setClassName(classEntity.getClassName());
+        }
+        return pipelineConfig;
     }
 
 }
