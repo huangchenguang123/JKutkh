@@ -54,19 +54,10 @@ public class HandlerManager {
         if (Objects.isNull(handler)) {
             Class<? extends Handler> clazz = (Class<? extends Handler>) jkutkhClassLoader.loadClass(url, className);
             Handler newHandler = clazz.getDeclaredConstructor().newInstance();
-            handlerMap.put(getKey(url, className), newHandler);
+            handlerMap.put(className, newHandler);
             handler = newHandler;
         }
         return handler;
-    }
-
-    /**
-     * @date 2020/12/23
-     * @author chenguang
-     * @desc get key of map
-     */
-    private static String getKey(String url, String className) {
-        return url.concat("/").concat(className);
     }
 
 }

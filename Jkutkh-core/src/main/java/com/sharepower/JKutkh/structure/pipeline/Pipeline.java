@@ -66,8 +66,9 @@ public class Pipeline {
             if (CollectionUtils.isEmpty(handlerWrapper.getParent())) {
                 rootHandlers.add(handlerWrapper);
             }
-            context.getDagParentMap().put(handlerWrapper.getId(), handlerWrapper.getParent());
-            context.getDagChildrenMap().put(handlerWrapper.getId(), handlerWrapper.getChildren());
+            // must copy array
+            context.getDagParentMap().put(handlerWrapper.getId(), Lists.newArrayList(handlerWrapper.getParent()));
+            context.getDagChildrenMap().put(handlerWrapper.getId(), Lists.newArrayList(handlerWrapper.getChildren()));
         }
         // run and callback
         rootHandlers.forEach(handler -> submit(handler, data));
@@ -100,13 +101,17 @@ public class Pipeline {
             ExecuteSystemContext context = (ExecuteSystemContext) data.get(ExecuteSystemContext.class.getSimpleName());
             List<Long> children = context.getDagChildrenMap().get(currentId);
             children.forEach(child -> {
-                // remove parent
-                List<Long> parent = context.getDagParentMap().get(child);
-                parent.remove(currentId);
-                // when parent is empty, run child
-                if (CollectionUtils.isEmpty(parent)) {
-                    // submit child
-                    submit(handlersMap.get(child), data);
+                // submit child must synchronized
+                // if not, parents maybe submit one more same child
+                synchronized (context) {
+                    // remove parent
+                    List<Long> parent = context.getDagParentMap().get(child);
+                    parent.remove(currentId);
+                    // when parent is empty, run child
+                    if (CollectionUtils.isEmpty(parent)) {
+                        // submit child
+                        submit(handlersMap.get(child), data);
+                    }
                 }
             });
             // delete count
