@@ -29,7 +29,7 @@ public interface JKutkhDAO {
      * @author chenguang
      * @desc get component
      */
-    @Select("select * from component where #{appId} = app_id and is_deleted = 0 limit 1")
+    @Select("select * from component where app_id = #{appId} and is_deleted = 0 limit 1")
     ComponentEntity getComponent(@Param("appId") Long appId);
 
     /**
@@ -37,7 +37,7 @@ public interface JKutkhDAO {
      * @author chenguang
      * @desc get component
      */
-    @Select("select * from classes where #{class_id} = classId and is_deleted = 0 limit 1")
-    ClassEntity getClass(@Param("appId") Long classId);
+    @Select("select * from classes where id = #{classId} and is_deleted = 0 limit 1")
+    ClassEntity getClass(@Param("classId") Long classId);
 
 }

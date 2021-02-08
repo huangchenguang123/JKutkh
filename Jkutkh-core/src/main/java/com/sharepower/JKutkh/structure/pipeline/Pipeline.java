@@ -14,7 +14,10 @@ import org.apache.commons.lang3.BooleanUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
+
+import lombok.SneakyThrows;
 
 /**
  * @date 2020/12/22
@@ -50,10 +53,12 @@ public class Pipeline {
      * @author chenguang
      * @desc input data and execute
      */
+    @SneakyThrows
     public void execute(Map<String, Object> data) {
-        // create map
-        handlersMap = handlers.stream().collect(Collectors.toMap(HandlerWrapper::getId, handlers -> handlers));
-
+        // set context
+        ExecuteSystemContext context = (ExecuteSystemContext) data.get(ExecuteSystemContext.class.getSimpleName());
+        // init cyclic barrier
+        context.setCountDownLatch(new CountDownLatch(handlers.size()));
         // create root handler
         List<HandlerWrapper> rootHandlers = Lists.newArrayList();
         // init context
@@ -61,13 +66,13 @@ public class Pipeline {
             if (CollectionUtils.isEmpty(handlerWrapper.getParent())) {
                 rootHandlers.add(handlerWrapper);
             }
-            // set context
-            ExecuteSystemContext context = (ExecuteSystemContext) data.get(ExecuteSystemContext.class.getSimpleName());
             context.getDagParentMap().put(handlerWrapper.getId(), handlerWrapper.getParent());
             context.getDagChildrenMap().put(handlerWrapper.getId(), handlerWrapper.getChildren());
         }
         // run and callback
         rootHandlers.forEach(handler -> submit(handler, data));
+        // await
+        context.getCountDownLatch().await();
     }
 
     /**
@@ -104,6 +109,8 @@ public class Pipeline {
                     submit(handlersMap.get(child), data);
                 }
             });
+            // delete count
+            context.getCountDownLatch().countDown();
             return currentId;
         });
     }
@@ -137,6 +144,8 @@ public class Pipeline {
             .collect(Collectors.toList());
         this.handlers.addAll(subHandlers);
         this.app = app;
+        // create map
+        handlersMap = handlers.stream().collect(Collectors.toMap(HandlerWrapper::getId, handlers -> handlers));
     }
 
     /**

@@ -4,6 +4,7 @@ import com.sharepower.JKutkh.common.enums.ExecuteEnums;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -37,5 +38,12 @@ public class ExecuteSystemContext {
      * @desc current node's not run children
      */
     private Map<Long, List<Long>> dagChildrenMap;
+
+    /**
+     * @date 2021/2/8
+     * @author chenguang
+     * @desc count downLatch is used to control pipeline
+     */
+    private CountDownLatch countDownLatch;
 
 }

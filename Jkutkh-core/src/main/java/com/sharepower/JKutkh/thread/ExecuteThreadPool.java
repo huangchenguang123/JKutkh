@@ -42,16 +42,15 @@ public class ExecuteThreadPool {
      * @author chenguang
      * @desc submit listenable callable
      */
-    public <T, R> void submitListenable(Callable<?> callable, Function<Object, Object> function) {
+    public void submitListenable(Callable<?> callable, Function<Object, Object> function) {
         ListenableFuture<?> listenableFuture = threadPoolExecutor.submit(callable);
-        Runnable runnable = () -> {
+        listenableFuture.addListener(() -> {
             try {
                 function.apply(listenableFuture.get());
             } catch (Exception e) {
                 log.error("listenableFuture run error", e);
             }
-        };
-        listenableFuture.addListener(runnable, threadPoolExecutor);
+        }, threadPoolExecutor);
     }
 
 }

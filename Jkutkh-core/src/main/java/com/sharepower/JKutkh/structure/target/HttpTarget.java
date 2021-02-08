@@ -1,6 +1,7 @@
 package com.sharepower.JKutkh.structure.target;
 
 import com.google.common.collect.Maps;
+import com.sharepower.JKutkh.common.dto.ExecuteSystemContext;
 import com.sharepower.JKutkh.common.dto.Result;
 import com.sharepower.JKutkh.common.enums.ExecuteEnums;
 import com.sharepower.JKutkh.structure.app.App;
@@ -39,7 +40,8 @@ public class HttpTarget extends Target {
     @Override
     protected void execute(Map<String, Object> data) {
         // get execute
-        ExecuteEnums execute = (ExecuteEnums) data.get(ExecuteEnums.class.getSimpleName());
+        ExecuteSystemContext context = (ExecuteSystemContext) data.get(ExecuteSystemContext.class.getSimpleName());
+        ExecuteEnums execute = context.getExecuteStatus();
         // remove all others fields
         data.keySet().removeIf(key -> !fields.contains(key));
         // copy ref to result
